@@ -1,6 +1,8 @@
 pipeline {
-    agent any
-
+   
+    agent {
+        label 'jenkins_agent'
+    }
 
     stages {
         stage('Clean Compile') {
@@ -17,7 +19,7 @@ pipeline {
 
             }
         }
-        
+        /*
         stage('SonarQube Analysis') {
             steps {
                 // Analyzing code.
@@ -26,14 +28,23 @@ pipeline {
                     }
             }
         }
+        */
         
+        stage('Versioning artifact'){
+            steps{
+                sh '''mkdir -p versions
+                      cp target/mvc_1.war versions/mvc_1:$BUILD_ID.war
+                   '''
+                }
+            }
+            
         
         stage('Artifact'){
             steps{
                     archiveArtifacts 'target/*.war'
                 }
             }
-            
+        /*    
         stage ('Artifactory Configuration') {
             steps {
                 rtServer (
@@ -93,7 +104,7 @@ pipeline {
         }
         */
         
-        
+        /*
          stage ('Publish to ECR') {
               steps {
                 
@@ -142,6 +153,6 @@ pipeline {
         }
         
         
-        
+        */
     }
 }
