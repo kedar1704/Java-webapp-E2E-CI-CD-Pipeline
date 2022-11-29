@@ -33,7 +33,7 @@ pipeline {
         stage('Versioning artifact'){
             steps{
                 sh '''mkdir -p versions
-                      cp target/mvc_1.war versions/mvc_1:v$VERSION.war
+                      cp target/mvc_1.war versions/mvc_1:v$BUILD_ID.war
 
                    '''
                 }
