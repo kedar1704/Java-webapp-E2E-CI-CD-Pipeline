@@ -38,6 +38,12 @@ pipeline {
                    '''
                 }
             }
+       
+       stage('deploy to tomcat'){
+            steps{
+               deploy adapters: [tomcat9(credentialsId: 'tomcat_cred', path: '', url: 'http://35.89.231.149:8080/')], contextPath: null, onFailure: false, war: '/home/jenkins/workspace/versioning_pipeline/versions/*.war'
+               }
+            }
             
         
         stage('Artifact'){
