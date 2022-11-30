@@ -41,6 +41,15 @@ pipeline {
             }
        
        
+       stage('Deploying artifacts to tomcat'){
+            steps{
+                  deploy adapters: [tomcat9(credentialsId: 'tomcat_cred', path: '', url: 'http://54.191.185.160:8080/')], contextPath: null, onFailure: false, war: '/versions/*.war'
+                }
+            }
+       
+       
+       
+       
         stage('Artifact'){
             steps{
                     archiveArtifacts 'target/*.war'
