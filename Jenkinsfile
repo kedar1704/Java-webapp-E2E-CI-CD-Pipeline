@@ -1,8 +1,10 @@
 pipeline {
    
-    agent {
-        label 'jenkins_agent'
-    }
+   agent any
+   
+//     agent {
+//         label 'jenkins_agent'
+//     }
 
     stages {
         stage('Clean Compile') {
